@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Task Detail - {{ task.title }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2>{{ task.title }}</h2>
+        <span class="badge badge-{{ task.status }}">{{ task.status }}</span>
+    </div>
+
+    <p><strong>Owner:</strong> {{ task.owner_id }}</p>
+    <p><strong>Assignee:</strong> {{ task.assignee_id }}</p>
+    <p><strong>Priority:</strong> {{ task.priority }}</p>
+    <p><strong>Notes:</strong> {{ task.notes or "No notes provided." }}</p>
+
+    <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
+        <a href="{{ url_for('tasks_list') }}" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+{% endblock %}

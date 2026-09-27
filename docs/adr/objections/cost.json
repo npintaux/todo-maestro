@@ -1,0 +1,21 @@
+{
+  "critic_lens": "cost",
+  "objections": [
+    {
+      "id": "COS-001",
+      "challenged_adr": "0002",
+      "severity": "medium",
+      "claim": "Multi-region active-active database replication incurs unsustainable inter-region egress costs and idle compute fees at launch scale.",
+      "failure_scenario": "Replicating millions of immutable audit entries and task history across multiple GCP regions generates excessive egress and Cloud Spanner fees.",
+      "recommended_mitigation": "Adopt single-region regional HA Cloud SQL with Cloud Storage WAL archiving and Cloud CDN / Cloud Load Balancing for global request routing."
+    },
+    {
+      "id": "COS-002",
+      "challenged_adr": "0001",
+      "severity": "low",
+      "claim": "Over-provisioning Cloud Run CPU always-allocated increases baseline idle compute spend during low-activity off-peak windows.",
+      "failure_scenario": "Paying for persistent CPU allocation 24/7 when request rates fluctuate across time zones drains budget.",
+      "recommended_mitigation": "Configure request-scoped CPU allocation with modest concurrency (80 requests/container) so compute costs track active requests."
+    }
+  ]
+}

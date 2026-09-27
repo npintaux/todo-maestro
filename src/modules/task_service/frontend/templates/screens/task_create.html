@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Create Task - TaskFlow{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Create New Task</h2>
+    <form method="POST" action="{{ url_for('task_create') }}">
+        <div style="margin-bottom: 1rem;">
+            <label for="title" style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Task Title *</label>
+            <input type="text" id="title" name="title" required style="width: 100%; padding: 0.5rem; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="notes" style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Description / Notes</label>
+            <textarea id="notes" name="notes" rows="4" style="width: 100%; padding: 0.5rem; box-sizing: border-box;"></textarea>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="priority" style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Priority</label>
+            <select id="priority" name="priority" style="width: 100%; padding: 0.5rem;">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+            </select>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+            <button type="submit" class="btn btn-primary">Create Task</button>
+            <a href="{{ url_for('tasks_list') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

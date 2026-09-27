@@ -1,0 +1,9 @@
+{
+  "subsystem": "audit_service",
+  "locked_at": "2026-09-27T09:11:59.387650+00:00",
+  "pytest_exit_code": 2,
+  "files": {
+    "tests/contract/audit_service/test_contract_audit_service.py": "36ade0edbcbc99870fe855ee829dbac7a9fe5d5127d2402ab96c55329a85f951",
+    "tests/behavioral/audit_service/test_behavioral_audit_service.py": "647e909ec849e5441a618ac3b089ffb26368345bcf1f7d1968b3b171ba2e5691"
+  }
+}

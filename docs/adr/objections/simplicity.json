@@ -1,0 +1,21 @@
+{
+  "critic_lens": "simplicity",
+  "objections": [
+    {
+      "id": "SIM-001",
+      "challenged_adr": "0003",
+      "severity": "medium",
+      "claim": "Mandating an external message broker for synchronous task CRUD introduces unnecessary operational moving parts and distributed consensus overhead.",
+      "failure_scenario": "If every task status update requires Pub/Sub ack roundtrips before responding to the user, write latency spikes and failure modes multiply.",
+      "recommended_mitigation": "Execute core task CRUD transactionally in the datastore, using asynchronous Pub/Sub only for out-of-band notification events and audit streaming."
+    },
+    {
+      "id": "SIM-002",
+      "challenged_adr": "0001",
+      "severity": "low",
+      "claim": "Complex microservice decomposition across dozens of micro-containers creates orchestration sprawl for a modular Flask application.",
+      "failure_scenario": "Managing separate containers for each minor capability complicates local development and CI/CD pipelines.",
+      "recommended_mitigation": "Deploy cohesive subsystems (task_service and audit_service) with clear domain boundaries within a single clean architecture service repository."
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "schema": "maestro/ui-spec@1",
+  "subsystem": "task_service",
+  "initial_screen": "tasks_list",
+  "screens": [
+    {
+      "id": "tasks_list",
+      "route": "/tasks",
+      "template": "tasks_list.html",
+      "user_stories": ["US-1", "US-2", "US-3", "US-4", "US-6"],
+      "components": [
+        "AppBar",
+        "NavRail",
+        "Button",
+        "List",
+        "ListItem",
+        "Text",
+        "Heading",
+        "Badge"
+      ],
+      "text_styles": [
+        {
+          "color": "{color.on-surface}",
+          "background": "{color.surface}",
+          "size": "normal"
+        },
+        {
+          "color": "{color.brand-on-primary}",
+          "background": "{color.brand-primary}",
+          "size": "normal"
+        }
+      ],
+      "transitions": [
+        {
+          "on": "create_task",
+          "to": "task_create"
+        },
+        {
+          "on": "view_task",
+          "to": "task_detail"
+        },
+        {
+          "on": "view_orphans",
+          "to": "orphaned_tasks"
+        }
+      ]
+    },
+    {
+      "id": "task_create",
+      "route": "/tasks/new",
+      "template": "task_create.html",
+      "user_stories": ["US-1"],
+      "components": [
+        "AppBar",
+        "NavRail",
+        "Button",
+        "TextField",
+        "Select",
+        "Card",
+        "Heading",
+        "Text"
+      ],
+      "text_styles": [
+        {
+          "color": "{color.on-surface}",
+          "background": "{color.surface}",
+          "size": "normal"
+        },
+        {
+          "color": "{color.brand-on-primary}",
+          "background": "{color.brand-primary}",
+          "size": "normal"
+        }
+      ],
+      "transitions": [
+        {
+          "on": "cancel",
+          "to": "tasks_list"
+        }
+      ]
+    },
+    {
+      "id": "task_detail",
+      "route": "/tasks/<task_id>",
+      "template": "task_detail.html",
+      "user_stories": ["US-2", "US-3", "US-6"],
+      "components": [
+        "AppBar",
+        "NavRail",
+        "Button",
+        "IconButton",
+        "TextField",
+        "Select",
+        "Card",
+        "List",
+        "ListItem",
+        "Badge",
+        "Heading",
+        "Text",
+        "Dialog"
+      ],
+      "text_styles": [
+        {
+          "color": "{color.on-surface}",
+          "background": "{color.surface}",
+          "size": "normal"
+        },
+        {
+          "color": "{color.brand-on-primary}",
+          "background": "{color.brand-primary}",
+          "size": "normal"
+        },
+        {
+          "color": "{color.on-danger}",
+          "background": "{color.danger}",
+          "size": "normal"
+        }
+      ],
+      "transitions": [
+        {
+          "on": "back_to_list",
+          "to": "tasks_list"
+        }
+      ]
+    },
+    {
+      "id": "orphaned_tasks",
+      "route": "/tasks/orphaned",
+      "template": "orphaned_tasks.html",
+      "user_stories": ["US-4", "US-7"],
+      "components": [
+        "AppBar",
+        "NavRail",
+        "Button",
+        "List",
+        "ListItem",
+        "Text",
+        "Heading",
+        "Badge"
+      ],
+      "text_styles": [
+        {
+          "color": "{color.on-surface}",
+          "background": "{color.surface}",
+          "size": "normal"
+        },
+        {
+          "color": "{color.brand-on-primary}",
+          "background": "{color.brand-primary}",
+          "size": "normal"
+        }
+      ],
+      "transitions": [
+        {
+          "on": "back_to_list",
+          "to": "tasks_list"
+        },
+        {
+          "on": "reassign_task",
+          "to": "task_detail"
+        }
+      ]
+    }
+  ]
+}

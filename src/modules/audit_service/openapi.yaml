@@ -1,0 +1,250 @@
+openapi: 3.0.3
+info:
+  title: TaskFlow Audit Service API
+  description: Tamper-evident append-only audit event recording, search, and export service.
+  version: 1.0.0
+paths:
+  /v1/audit/events:
+    post:
+      summary: Record audit event
+      description: Append a tamper-evident audit event to the append-only log.
+      operationId: recordAuditEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAuditEventRequest'
+      responses:
+        '201':
+          description: Audit event recorded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditEventResponse'
+        '400':
+          description: Invalid audit event payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      summary: Search audit events
+      description: Query audit log by actor, task, action type, or time window (Auditor only).
+      operationId: searchAuditEvents
+      parameters:
+        - name: actor_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: task_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: action
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: start_time
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: end_time
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Matching audit events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditEventListResponse'
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - auditor role required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/audit/export:
+    post:
+      summary: Export audit trail
+      description: Generate an immutable audit trail export (Auditor only).
+      operationId: exportAuditTrail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportAuditRequest'
+      responses:
+        '200':
+          description: Audit export payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportAuditResponse'
+        '400':
+          description: Invalid export parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CreateAuditEventRequest:
+      type: object
+      required:
+        - actor_id
+        - action
+        - target_type
+        - target_id
+      properties:
+        actor_id:
+          type: string
+        action:
+          type: string
+        target_type:
+          type: string
+        target_id:
+          type: string
+        context:
+          type: object
+          additionalProperties: true
+    AuditEventResponse:
+      type: object
+      required:
+        - id
+        - actor_id
+        - action
+        - target_type
+        - target_id
+        - timestamp
+      properties:
+        id:
+          type: string
+        actor_id:
+          type: string
+        action:
+          type: string
+        target_type:
+          type: string
+        target_id:
+          type: string
+        context:
+          type: object
+          additionalProperties: true
+        timestamp:
+          type: string
+          format: date-time
+    AuditEventListResponse:
+      type: object
+      required:
+        - events
+        - total
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEventResponse'
+        total:
+          type: integer
+    ExportAuditRequest:
+      type: object
+      properties:
+        start_time:
+          type: string
+        end_time:
+          type: string
+        actor_id:
+          type: string
+        task_id:
+          type: string
+    ExportAuditResponse:
+      type: object
+      required:
+        - export_id
+        - record_count
+        - generated_at
+        - records
+      properties:
+        export_id:
+          type: string
+        record_count:
+          type: integer
+        generated_at:
+          type: string
+          format: date-time
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEventResponse'
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+        message:
+          type: string
