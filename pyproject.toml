@@ -34,6 +34,7 @@ target-version = "py311"
 select = ["E", "F", "I", "W"]
 
 [tool.mypy]
+mypy_path = "src"
 python_version = "3.11"
 strict = true
 warn_unused_configs = true
@@ -42,3 +43,13 @@ disallow_incomplete_defs = true
 check_untyped_defs = true
 disallow_untyped_decorators = false
 ignore_missing_imports = true
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]
