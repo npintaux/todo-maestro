@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TaskFlow{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='tokens.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>TaskFlow Enterprise</h1>
+        <nav>
+            <a href="{{ url_for('tasks_list') }}" class="btn btn-secondary">Tasks</a>
+            <a href="{{ url_for('orphaned_tasks') }}" class="btn btn-secondary">Orphaned Tasks</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

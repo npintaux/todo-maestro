@@ -1,0 +1,29 @@
+:root {
+  --color-border: #D1D5DB;
+  --color-brand-on-primary: #FFFFFF;
+  --color-brand-primary: #1A56DB;
+  --color-brand-primary-hover: #1E429F;
+  --color-danger: #B91C1C;
+  --color-on-danger: #FFFFFF;
+  --color-on-success: #FFFFFF;
+  --color-on-surface: #111827;
+  --color-on-surface-muted: #4B5563;
+  --color-success: #047857;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F3F4F6;
+  --font-family-mono: JetBrains Mono, ui-monospace, monospace;
+  --font-family-sans: Inter, system-ui, sans-serif;
+  --font-size-body: 16px;
+  --font-size-caption: 12px;
+  --font-size-display: 40px;
+  --font-size-heading: 28px;
+  --font-size-title: 20px;
+  --radius-md: 8px;
+  --radius-pill: 9999px;
+  --radius-sm: 4px;
+  --space-lg: 24px;
+  --space-md: 16px;
+  --space-sm: 8px;
+  --space-xl: 40px;
+  --space-xs: 4px;
+}
