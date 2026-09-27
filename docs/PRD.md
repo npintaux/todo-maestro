@@ -128,6 +128,86 @@ the offboarding is audited. *(Covers FR-2, FR-4, FR-7, FR-9.)*
   notified (email is acceptable for v1; the design must not preclude other
   channels).
 
+### Story US-1: Capture a task
+* **Priority**: Must-have
+* **As an** employee,
+* **I want to** create a new task with a title, optional notes, due date, and priority,
+* **So that** I can reliably capture and organize work items in my task list.
+* **Acceptance Criteria**:
+  - [ ] **AC-1.1**: Given an authenticated user, when creating a task with valid title and priority, then the task is persisted in `open` status with the user as owner and returned with 201 Created.
+  - [ ] **AC-1.2**: Given an authenticated user, when querying their tasks list, then newly created tasks are returned with status, priority, and due dates.
+* **Contractual WAF Alignment**: System Design (Cloud Run CRUD API), Performance (p95 write latency < 500 ms).
+
+### Story US-2: Work and complete a task
+* **Priority**: Must-have
+* **As an** employee or assigned collaborator,
+* **I want to** edit task details and transition status across `open → in-progress → done`,
+* **So that** task progress is accurately tracked and recorded.
+* **Acceptance Criteria**:
+  - [ ] **AC-2.1**: Given an existing open task and an authorized user, when updating details or advancing status to `in-progress` or `done`, then the task updates and an immutable history entry is appended.
+  - [ ] **AC-2.2**: Given an unauthorized user, when attempting to modify a task they do not own or have edit rights to, then the request is rejected with 403 Forbidden.
+* **Contractual WAF Alignment**: Security (Server-side AuthZ), Reliability (Committed state durability).
+
+### Story US-3: Follow-the-sun handoff (share / redirect)
+* **Priority**: Must-have
+* **As an** employee finishing my workday in one time zone,
+* **I want to** share or redirect/reassign a task to a colleague in another time zone,
+* **So that** work continues seamlessly across global time zones without losing context or history.
+* **Acceptance Criteria**:
+  - [ ] **AC-3.1**: Given an existing task, when the owner shares it with a colleague granting view or edit permission, then the recipient can access the task per granted permissions while the owner retains access.
+  - [ ] **AC-3.2**: Given an existing task, when the owner redirects/reassigns ownership to a colleague, then ownership transfers, previous owner retains visibility, and the transfer is recorded in task history and the audit log.
+* **Contractual WAF Alignment**: Operational Excellence (Traceable handoff), Security (Explicit permission grants).
+
+### Story US-4: Team lead rebalances work
+* **Priority**: Should-have
+* **As a** team lead,
+* **I want to** view tasks shared within my team and reassign tasks between colleagues,
+* **So that** team workload is balanced and overdue tasks are promptly resolved.
+* **Acceptance Criteria**:
+  - [ ] **AC-4.1**: Given a team lead, when viewing team tasks, then the lead can list and filter tasks by status, priority, and assignee.
+  - [ ] **AC-4.2**: Given an overdue task assigned to a team member, when the lead reassigns the task to another colleague, then ownership transfers and history captures the reassignment reason and actor.
+* **Contractual WAF Alignment**: Performance (Filtered list queries p95 < 300 ms), Reliability (Audit durability).
+
+### Story US-5: Auditor investigates
+* **Priority**: Must-have
+* **As an** auditor or compliance officer,
+* **I want to** search and export the append-only audit trail across users, tasks, and time windows,
+* **So that** compliance investigations can reconstruct full histories with tamper evidence.
+* **Acceptance Criteria**:
+  - [ ] **AC-5.1**: Given an authenticated user with auditor role, when searching audit logs by user, task, action type, or time range, then all matching audit records are returned with actors, timestamps, and context.
+  - [ ] **AC-5.2**: Given an auditor, when requesting an audit trail export, then an immutable export trail is generated; non-auditor users receive 403 Forbidden.
+* **Contractual WAF Alignment**: Security (Tamper-evident append-only audit log, zero task content in logs), Cost (Storage tiering).
+
+### Story US-6: Recover a deleted task
+* **Priority**: Should-have
+* **As an** employee who mistakenly deleted a task,
+* **I want to** restore the task within the retention window,
+* **So that** accidental deletions do not cause unrecoverable data loss.
+* **Acceptance Criteria**:
+  - [ ] **AC-6.1**: Given an existing task, when the owner deletes it, then the task is marked soft-deleted, excluded from standard lists, and an audit event is emitted.
+  - [ ] **AC-6.2**: Given a soft-deleted task within the retention window, when the owner restores it, then its status is restored and the restoration action is appended to history and the audit log.
+* **Contractual WAF Alignment**: Reliability (Disaster recovery / accidental loss protection), Security (Audit logging).
+
+### Story US-7: Administrator offboards a user
+* **Priority**: Must-have
+* **As a** system administrator,
+* **I want to** deactivate a departing user and surface their open tasks for reassignment,
+* **So that** former employees cannot access the system and orphaned tasks are reassigned.
+* **Acceptance Criteria**:
+  - [ ] **AC-7.1**: Given an active user, when an administrator deactivates the user, then the user status is set to deactivated and subsequent authentication attempts are denied with 401/403.
+  - [ ] **AC-7.2**: Given a deactivated user with open tasks, when an administrator or lead queries orphaned tasks, then all unassigned/open tasks previously owned by the user are surfaced for reassignment.
+* **Contractual WAF Alignment**: Security (Immediate token revocation / offboarding), Operational Excellence (Orphan prevention).
+
+### Story US-8: Task deadline and handoff notifications
+* **Priority**: Should-have
+* **As an** employee,
+* **I want to** receive notifications when tasks are shared/redirected to me or when deadlines are approaching within 24 hours,
+* **So that** critical follow-the-sun handoffs and deadlines are never missed.
+* **Acceptance Criteria**:
+  - [ ] **AC-8.1**: Given a task shared or redirected to a user, when the handoff occurs, then a notification record is generated for the recipient.
+  - [ ] **AC-8.2**: Given an open task with a due date within 24 hours, when deadline evaluation occurs, then an alert notification is emitted.
+* **Contractual WAF Alignment**: Reliability (Graceful degradation if notification service is delayed), Operational Excellence.
+
 ## 6. Non-functional requirements (Google Cloud Well-Architected Framework)
 
 NFRs are organised by the pillars of the **Google Cloud Well-Architected
@@ -200,6 +280,13 @@ Framework**. The architecture must reason about the system through each pillar.
   region) so 24/7 operation does not mean 24/7 peak spend.
 - **NFR-COST-3 Storage tiering.** Cold history/audit data can move to cheaper
   storage while remaining queryable within stated latencies.
+
+### 6.6 System Design
+- **NFR-SYS-1 Serverless Compute.** Stateless request-serving tier packaged as a container deployed to Cloud Run, scaling horizontally with auto-scaling down to zero during idle periods.
+- **NFR-SYS-2 Regional Topology.** Deployed in low-latency primary regions with Cloud Load Balancing fronting global traffic.
+
+### 6.7 Sustainability
+- **NFR-SUS-1 Carbon-Efficient Regions.** Primary compute deployed to carbon-optimized Google Cloud regions (e.g. europe-west1, us-central1) to minimize carbon footprint.
 
 ## 7. Constraints & assumptions
 
