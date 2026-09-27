@@ -1,0 +1,9 @@
+{
+  "subsystem": "task_service",
+  "locked_at": "2026-09-27T09:12:06.318036+00:00",
+  "pytest_exit_code": 2,
+  "files": {
+    "tests/contract/task_service/test_contract_task_service.py": "43a55c628883660045cfafb5fa86d3a5c725eab00b389c89d774f3f06e0b66c7",
+    "tests/behavioral/task_service/test_behavioral_task_service.py": "f5bd2741a15729c018bf199be1e536f653c3d8c02daeffe632959471cc42a218"
+  }
+}
