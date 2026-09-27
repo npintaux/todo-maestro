@@ -1,0 +1,193 @@
+{
+  "completed_stages": [
+    "gate-0",
+    "gate-adversarial",
+    "gate-0.5",
+    "gate-1",
+    "gate-security",
+    "gate-2",
+    "gate-ui",
+    "gate-3",
+    "gate-4",
+    "gate-frontend"
+  ],
+  "remediation_attempts": {
+    "gate-0": 0,
+    "gate-adversarial": 0,
+    "gate-0.5": 0,
+    "gate-1": 0,
+    "gate-security": 0,
+    "gate-2:audit_service": 0,
+    "gate-2:task_service": 0,
+    "gate-ui:task_service": 0,
+    "gate-3:audit_service": 0,
+    "gate-4:audit_service": 0,
+    "gate-frontend:task_service": 0,
+    "gate-3:task_service": 0,
+    "gate-4:task_service": 0
+  },
+  "execution_history": [
+    {
+      "stage": "gate-0",
+      "subsystem": "",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:05:11.095511+00:00",
+      "stdout_snippet": "filename\": \"0002-relational-and-audit-datastore.md\",\n      \"adr_id\": \"0002\",\n      \"title\": \"Relational and Audit Datastore on Google Cloud SQL for PostgreSQL\",\n      \"status\": \"proposed\",\n      \"superseded_by\": null,\n      \"approved_by\": \"pending\",\n      \"violations\": [],\n      \"valid\": true\n    },\n    {\n      \"is_valid\": true,\n      \"filename\": \"0003-asynchronous-messaging-and-notifications.md\",\n      \"adr_id\": \"0003\",\n      \"title\": \"Asynchronous Messaging and Notification Ingestion on Google Cloud Pub/Sub\",\n      \"status\": \"proposed\",\n      \"superseded_by\": null,\n      \"approved_by\": \"pending\",\n      \"violations\": [],\n      \"valid\": true\n    },\n    {\n      \"is_valid\": true,\n      \"filename\": \"0004-identity-authentication-and-rbac.md\",\n      \"adr_id\": \"0004\",\n      \"title\": \"Identity Authentication and Server-Side RBAC\",\n      \"status\": \"proposed\",\n      \"superseded_by\": null,\n      \"approved_by\": \"pending\",\n      \"violations\": [],\n      \"valid\": true\n    }\n  ]\n}\n\u2705 [Gate 0] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-adversarial",
+      "subsystem": "",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:05:13.725911+00:00",
+      "stdout_snippet": "==================================================\n\ud83c\udfaf Running Maestro Mechanical Gates [Stage: gate-adversarial]\n==================================================\n\u25b6 [Gate Adversarial] Checking docs/adr/objections/ Structured Adversarial Review...\n{\n  \"valid\": true,\n  \"objections_count\": 6,\n  \"critic_counts\": {\n    \"cost\": 2,\n    \"resilience\": 2,\n    \"simplicity\": 2\n  },\n  \"resolved_count\": 6,\n  \"unresolved_count\": 0,\n  \"unresolved_ids\": []\n}\n\u2705 [Gate Adversarial] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-0.5",
+      "subsystem": "",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:05:47.801208+00:00",
+      "stdout_snippet": "ame\": \"0002-relational-and-audit-datastore.md\",\n      \"adr_id\": \"0002\",\n      \"title\": \"Relational and Audit Datastore on Google Cloud SQL for PostgreSQL\",\n      \"status\": \"accepted\",\n      \"superseded_by\": null,\n      \"approved_by\": \"npintaux\",\n      \"violations\": [],\n      \"valid\": true\n    },\n    {\n      \"is_valid\": true,\n      \"filename\": \"0003-asynchronous-messaging-and-notifications.md\",\n      \"adr_id\": \"0003\",\n      \"title\": \"Asynchronous Messaging and Notification Ingestion on Google Cloud Pub/Sub\",\n      \"status\": \"accepted\",\n      \"superseded_by\": null,\n      \"approved_by\": \"npintaux\",\n      \"violations\": [],\n      \"valid\": true\n    },\n    {\n      \"is_valid\": true,\n      \"filename\": \"0004-identity-authentication-and-rbac.md\",\n      \"adr_id\": \"0004\",\n      \"title\": \"Identity Authentication and Server-Side RBAC\",\n      \"status\": \"accepted\",\n      \"superseded_by\": null,\n      \"approved_by\": \"npintaux\",\n      \"violations\": [],\n      \"valid\": true\n    }\n  ]\n}\n\u2705 [Gate 0.5] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-1",
+      "subsystem": "",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:06:03.825313+00:00",
+      "stdout_snippet": "\": true\n    }\n  ]\n}\n\u2705 [Gate 0.5] Passed.\n\u25b6 [Gate 1] Checking Architecture WAF Compliance & Frozen Decisions...\n{\n  \"is_valid\": true,\n  \"file_path\": \"docs/architecture.md\",\n  \"pillars_found\": [\n    \"system_design\",\n    \"operational_excellence\",\n    \"security\",\n    \"reliability\",\n    \"cost_optimization\",\n    \"performance\",\n    \"sustainability\"\n  ],\n  \"pillars_missing\": [],\n  \"pillars_uncited\": [],\n  \"frozen_services\": [\n    \"Cloud Load Balancing\",\n    \"Cloud Logging\",\n    \"Cloud Run\",\n    \"Cloud SQL\",\n    \"Pub/Sub\",\n    \"Secret Manager\"\n  ],\n  \"docs_citations_count\": 7,\n  \"gcp_services_mentioned\": [\n    \"Cloud Run\",\n    \"Cloud SQL\",\n    \"Cloud Storage\",\n    \"Pub/Sub\",\n    \"Cloud Armor\",\n    \"Secret Manager\",\n    \"Cloud Logging\",\n    \"Cloud Monitoring\",\n    \"Cloud Load Balancing\",\n    \"Identity-Aware Proxy\",\n    \"IAP\",\n    \"Workload Identity\",\n    \"Cloud IAM\"\n  ],\n  \"subsystems_found\": [\n    \"audit_service\",\n    \"task_service\"\n  ],\n  \"violations\": [],\n  \"valid\": true\n}\n\u2705 [Gate 1] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-security",
+      "subsystem": "",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:06:06.556673+00:00",
+      "stdout_snippet": "==================================================\n\ud83c\udfaf Running Maestro Mechanical Gates [Stage: gate-security]\n==================================================\n\u25b6 [Gate Security] Checking docs/security.md STRIDE Threat Model & IAM Matrix...\n\u2705 Security Architecture Audit PASSED for docs/security.md\n   - STRIDE Categories: 6/6 covered\n   - Service Accounts: 4 defined\n   - Cataloged Secrets: 3 entries\n   - Mermaid Boundaries: Present\n   - PRD NFR Citations: NFR-SEC-1, NFR-SEC-2, NFR-SEC-3, NFR-SEC-4, NFR-SEC-5, NFR-SEC-6\n\u2705 [Gate Security] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-2",
+      "subsystem": "audit_service",
+      "exit_code": 1,
+      "attempt": 1,
+      "passed": false,
+      "timestamp": "2026-09-27T09:07:36.821817+00:00",
+      "stdout_snippet": "==================================================\n\ud83c\udfaf Running Maestro Mechanical Gates [Stage: gate-2]\n==================================================\n\u25b6 [Gate Contract] Validating Contract & Spec for 'src/modules/audit_service/openapi.yaml'...\n",
+      "stderr_snippet": "Traceback (most recent call last):\n  File \"/home/user/.gemini/config/plugins/maestro/scripts/validate_contract.py\", line 28, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'\n"
+    },
+    {
+      "stage": "gate-2",
+      "subsystem": "audit_service",
+      "exit_code": 0,
+      "attempt": 2,
+      "passed": true,
+      "timestamp": "2026-09-27T09:08:17.076055+00:00",
+      "stdout_snippet": "==================================================\n\ud83c\udfaf Running Maestro Mechanical Gates [Stage: gate-2]\n==================================================\n\u25b6 [Gate Contract] Validating Contract & Spec for 'src/modules/audit_service/openapi.yaml'...\n{\n  \"is_valid\": true,\n  \"file_path\": \"src/modules/audit_service/openapi.yaml\",\n  \"endpoints_found\": [\n    \"GET /v1/audit/events\",\n    \"POST /v1/audit/events\",\n    \"POST /v1/audit/export\"\n  ],\n  \"schemas_found\": [\n    \"AuditEventListResponse\",\n    \"AuditEventResponse\",\n    \"CreateAuditEventRequest\",\n    \"ErrorResponse\",\n    \"ExportAuditRequest\",\n    \"ExportAuditResponse\"\n  ],\n  \"status_codes_checked\": [\n    \"200\",\n    \"201\",\n    \"400\",\n    \"401\",\n    \"403\",\n    \"500\"\n  ],\n  \"violations\": [],\n  \"selected_pattern\": \"repository-service\",\n  \"valid\": true\n}\n\u2705 [Gate Contract] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-2",
+      "subsystem": "task_service",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:09:10.074470+00:00",
+      "stdout_snippet": "asks/orphaned\",\n    \"GET /v1/tasks/{task_id}\",\n    \"GET /v1/tasks/{task_id}/history\",\n    \"PATCH /v1/notifications/{notification_id}/read\",\n    \"PATCH /v1/tasks/{task_id}/status\",\n    \"PATCH /v1/users/{user_id}/status\",\n    \"POST /v1/tasks\",\n    \"POST /v1/tasks/{task_id}/reassign\",\n    \"POST /v1/tasks/{task_id}/restore\",\n    \"POST /v1/tasks/{task_id}/shares\",\n    \"PUT /v1/tasks/{task_id}\"\n  ],\n  \"schemas_found\": [\n    \"CreateTaskRequest\",\n    \"ErrorResponse\",\n    \"NotificationListResponse\",\n    \"NotificationResponse\",\n    \"ReassignTaskRequest\",\n    \"ShareTaskRequest\",\n    \"StatusTransitionRequest\",\n    \"TaskHistoryListResponse\",\n    \"TaskHistoryResponse\",\n    \"TaskListResponse\",\n    \"TaskResponse\",\n    \"UpdateTaskRequest\",\n    \"UpdateUserStatusRequest\",\n    \"UserResponse\"\n  ],\n  \"status_codes_checked\": [\n    \"200\",\n    \"201\",\n    \"400\",\n    \"401\",\n    \"403\",\n    \"404\",\n    \"500\"\n  ],\n  \"violations\": [],\n  \"selected_pattern\": \"state-machine\",\n  \"valid\": true\n}\n\u2705 [Gate Contract] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-ui",
+      "subsystem": "task_service",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:09:28.000328+00:00",
+      "stdout_snippet": "==================================================\n\ud83c\udfaf Running Maestro Mechanical Gates [Stage: gate-ui]\n==================================================\n\u25b6 [Gate UI] Validating ui-spec for 'src/modules/task_service/ui-spec.json'...\n{\n  \"is_valid\": true,\n  \"file_path\": \"src/modules/task_service/ui-spec.json\",\n  \"screens_found\": [\n    \"orphaned_tasks\",\n    \"task_create\",\n    \"task_detail\",\n    \"tasks_list\"\n  ],\n  \"user_stories_covered\": [\n    \"US-1\",\n    \"US-2\",\n    \"US-3\",\n    \"US-4\",\n    \"US-6\",\n    \"US-7\"\n  ],\n  \"violations\": [],\n  \"valid\": true\n}\n\u2705 [Gate UI] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-2",
+      "subsystem": "task_service",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:09:33.236525+00:00",
+      "stdout_snippet": "asks/orphaned\",\n    \"GET /v1/tasks/{task_id}\",\n    \"GET /v1/tasks/{task_id}/history\",\n    \"PATCH /v1/notifications/{notification_id}/read\",\n    \"PATCH /v1/tasks/{task_id}/status\",\n    \"PATCH /v1/users/{user_id}/status\",\n    \"POST /v1/tasks\",\n    \"POST /v1/tasks/{task_id}/reassign\",\n    \"POST /v1/tasks/{task_id}/restore\",\n    \"POST /v1/tasks/{task_id}/shares\",\n    \"PUT /v1/tasks/{task_id}\"\n  ],\n  \"schemas_found\": [\n    \"CreateTaskRequest\",\n    \"ErrorResponse\",\n    \"NotificationListResponse\",\n    \"NotificationResponse\",\n    \"ReassignTaskRequest\",\n    \"ShareTaskRequest\",\n    \"StatusTransitionRequest\",\n    \"TaskHistoryListResponse\",\n    \"TaskHistoryResponse\",\n    \"TaskListResponse\",\n    \"TaskResponse\",\n    \"UpdateTaskRequest\",\n    \"UpdateUserStatusRequest\",\n    \"UserResponse\"\n  ],\n  \"status_codes_checked\": [\n    \"200\",\n    \"201\",\n    \"400\",\n    \"401\",\n    \"403\",\n    \"404\",\n    \"500\"\n  ],\n  \"violations\": [],\n  \"selected_pattern\": \"state-machine\",\n  \"valid\": true\n}\n\u2705 [Gate Contract] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-3",
+      "subsystem": "audit_service",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:15:37.362896+00:00",
+      "stdout_snippet": "=============\n\ud83c\udfaf Running Maestro Mechanical Gates [Stage: gate-3]\n==================================================\n\u25b6 [Gate Code Quality] Running Ruff linter on 'src/modules/audit_service'...\nAll checks passed!\n\u25b6 [Gate Code Quality] Running Ruff format check on 'src/modules/audit_service'...\n10 files already formatted\n\u25b6 [Gate Code Quality] Running Mypy strict type check on 'src/modules/audit_service'...\nSuccess: no issues found in 9 source files\n\u25b6 [Gate Code Quality] Auditing 1-class-per-file and domain purity across module directories...\n  -> Auditing implementation for 'src/modules/audit_service'...\n{\n  \"is_valid\": true,\n  \"subsystem\": \"audit_service\",\n  \"files_checked\": [\n    \"__init__.py\",\n    \"adapters/__init__.py\",\n    \"adapters/memory_repository.py\",\n    \"domain/__init__.py\",\n    \"domain/models.py\",\n    \"domain/repository.py\",\n    \"domain/service.py\",\n    \"entrypoints/__init__.py\",\n    \"entrypoints/app.py\"\n  ],\n  \"violations\": [],\n  \"valid\": true\n}\n\u2705 [Gate Code Quality] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-4",
+      "subsystem": "audit_service",
+      "exit_code": 2,
+      "attempt": 1,
+      "passed": false,
+      "timestamp": "2026-09-27T09:15:40.838052+00:00",
+      "stdout_snippet": "ktrees/audit_service/tests/contract/task_service/test_contract_task_service.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n../../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/contract/task_service/test_contract_task_service.py:8: in <module>\n    from modules.task_service.entrypoints.app import create_task_app\nE   ModuleNotFoundError: No module named 'modules.task_service.entrypoints'\n=========================== short test summary info ============================\nERROR tests/behavioral/task_service/test_behavioral_task_service.py\nERROR tests/contract/task_service/test_contract_task_service.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n============================== 2 errors in 0.23s ===============================\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-4",
+      "subsystem": "audit_service",
+      "exit_code": 0,
+      "attempt": 2,
+      "passed": true,
+      "timestamp": "2026-09-27T09:15:58.063514+00:00",
+      "stdout_snippet": "                  0      0   100%\nsrc/modules/audit_service/adapters/__init__.py                0      0   100%\nsrc/modules/audit_service/adapters/memory_repository.py      12      0   100%\nsrc/modules/audit_service/domain/__init__.py                  0      0   100%\nsrc/modules/audit_service/domain/models.py                   46      0   100%\nsrc/modules/audit_service/domain/repository.py                4      0   100%\nsrc/modules/audit_service/domain/service.py                  20      0   100%\nsrc/modules/audit_service/entrypoints/__init__.py             0      0   100%\nsrc/modules/audit_service/entrypoints/app.py                 49      0   100%\n---------------------------------------------------------------------------------------\nTOTAL                                                       131      0   100%\nRequired test coverage of 100% reached. Total coverage: 100.00%\n============================== 22 passed in 0.20s ==============================\n\u2705 [Gate Test Coverage] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-frontend",
+      "subsystem": "task_service",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:26:11.898814+00:00",
+      "stdout_snippet": "==================================================\n\ud83c\udfaf Running Maestro Mechanical Gates [Stage: gate-frontend]\n==================================================\n\u25b6 [Gate Frontend] Validating front-end conformance for 'src/modules/task_service'...\n{\n  \"is_valid\": true,\n  \"subsystem_path\": \"src/modules/task_service\",\n  \"screens_found\": [\n    \"orphaned_tasks\",\n    \"task_create\",\n    \"task_detail\",\n    \"tasks_list\"\n  ],\n  \"violations\": [],\n  \"valid\": true\n}\n\u2705 [Gate Frontend] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-3",
+      "subsystem": "task_service",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:26:15.051413+00:00",
+      "stdout_snippet": "estro Mechanical Gates [Stage: gate-3]\n==================================================\n\u25b6 [Gate Code Quality] Running Ruff linter on 'src/modules/task_service'...\nAll checks passed!\n\u25b6 [Gate Code Quality] Running Ruff format check on 'src/modules/task_service'...\n11 files already formatted\n\u25b6 [Gate Code Quality] Running Mypy strict type check on 'src/modules/task_service'...\nSuccess: no issues found in 10 source files\n\u25b6 [Gate Code Quality] Auditing 1-class-per-file and domain purity across module directories...\n  -> Auditing implementation for 'src/modules/task_service'...\n{\n  \"is_valid\": true,\n  \"subsystem\": \"task_service\",\n  \"files_checked\": [\n    \"__init__.py\",\n    \"adapters/__init__.py\",\n    \"adapters/memory_task_repo.py\",\n    \"domain/__init__.py\",\n    \"domain/models.py\",\n    \"domain/repository.py\",\n    \"domain/service.py\",\n    \"domain/state_machine.py\",\n    \"entrypoints/__init__.py\",\n    \"entrypoints/app.py\"\n  ],\n  \"violations\": [],\n  \"valid\": true\n}\n\u2705 [Gate Code Quality] Passed.\n",
+      "stderr_snippet": ""
+    },
+    {
+      "stage": "gate-4",
+      "subsystem": "task_service",
+      "exit_code": 0,
+      "attempt": 1,
+      "passed": true,
+      "timestamp": "2026-09-27T09:26:19.164788+00:00",
+      "stdout_snippet": "ce/adapters/__init__.py               0      0   100%\nsrc/modules/task_service/adapters/memory_task_repo.py      50      0   100%\nsrc/modules/task_service/domain/__init__.py                 0      0   100%\nsrc/modules/task_service/domain/models.py                  58      0   100%\nsrc/modules/task_service/domain/repository.py               4      0   100%\nsrc/modules/task_service/domain/service.py                153      0   100%\nsrc/modules/task_service/domain/state_machine.py           26      0   100%\nsrc/modules/task_service/entrypoints/__init__.py            0      0   100%\nsrc/modules/task_service/entrypoints/app.py               235      0   100%\n-------------------------------------------------------------------------------------\nTOTAL                                                     526      0   100%\nRequired test coverage of 100% reached. Total coverage: 100.00%\n============================== 41 passed in 0.42s ==============================\n\u2705 [Gate Test Coverage] Passed.\n",
+      "stderr_snippet": ""
+    }
+  ],
+  "circuit_breaker_tripped": false,
+  "tripped_stage": ""
+}

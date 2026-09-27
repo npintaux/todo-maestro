@@ -1,0 +1,63 @@
+# Cloud Build CI/CD Pipeline for TaskFlow
+# Complies with ADR-0001 (Cloud Run in europe-west1) and ADR-0004 (IAP/IAM least-privilege)
+
+steps:
+  # 1. Run unit, contract, and behavioral tests in isolated container
+  - name: 'python:3.11-slim'
+    id: 'test'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pip install --upgrade pip
+        pip install . pytest pytest-cov ruff mypy types-PyYAML
+        pytest tests/ --cov=src --cov-report=term-missing --cov-fail-under=100
+
+  # 2. Build multi-stage production container
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-image'
+    args:
+      - 'build'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/taskflow/app:$COMMIT_SHA'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/taskflow/app:latest'
+      - '-f'
+      - 'deploy/Dockerfile'
+      - '.'
+
+  # 3. Push container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'push-image'
+    args:
+      - 'push'
+      - '--all-tags'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/taskflow/app'
+
+  # 4. Deploy revision to Google Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'deploy-cloud-run'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'taskflow-service'
+      - '--image=europe-west1-docker.pkg.dev/$PROJECT_ID/taskflow/app:$COMMIT_SHA'
+      - '--region=europe-west1'
+      - '--platform=managed'
+      - '--min-instances=1'
+      - '--max-instances=10'
+      - '--concurrency=80'
+      - '--cpu=1'
+      - '--memory=512Mi'
+      - '--timeout=300s'
+      - '--port=8080'
+      - '--allow-unauthenticated'
+
+images:
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/taskflow/app:$COMMIT_SHA'
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/taskflow/app:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  dynamic_substitutions: true
