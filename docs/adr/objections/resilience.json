@@ -1,0 +1,21 @@
+{
+  "critic_lens": "resilience",
+  "objections": [
+    {
+      "id": "RES-001",
+      "challenged_adr": "0001",
+      "severity": "high",
+      "claim": "Cloud Run instances cold starts and sudden traffic surges can cause dropped requests during follow-the-sun handoff peaks.",
+      "failure_scenario": "During sudden handoff peaks between APAC and EMEA time zones, rapid container scaling causes cold start latencies exceeding 2 seconds and connection pool exhaustion on the primary datastore.",
+      "recommended_mitigation": "Configure minimum warm instances (min-instances=1) and tune connection pooling limits."
+    },
+    {
+      "id": "RES-002",
+      "challenged_adr": "0002",
+      "severity": "medium",
+      "claim": "Single-zone Cloud SQL outage halts all global task CRUD operations violating 99% availability and RTO <= 1 hour.",
+      "failure_scenario": "A physical datacenter disruption in primary zone causes primary database unavailability.",
+      "recommended_mitigation": "Enable Cloud SQL Regional High Availability (HA) with automatic synchronous multi-zone failover."
+    }
+  ]
+}

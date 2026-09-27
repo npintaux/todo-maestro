@@ -1,0 +1,40 @@
+{
+  "resolutions": [
+    {
+      "objection_id": "RES-001",
+      "disposition": "mitigated",
+      "resolution": "Updated ADR-0001 to mandate minimum warm instances (min-instances=1) and connection pooling limits.",
+      "adr_updated": "0001"
+    },
+    {
+      "objection_id": "RES-002",
+      "disposition": "mitigated",
+      "resolution": "Updated ADR-0002 to mandate Cloud SQL Regional High Availability (HA) across multiple zones with automated failover.",
+      "adr_updated": "0002"
+    },
+    {
+      "objection_id": "COS-001",
+      "disposition": "mitigated",
+      "resolution": "Updated ADR-0002 to standardize on single primary region with Regional HA, avoiding cross-region egress traps while meeting 99% availability.",
+      "adr_updated": "0002"
+    },
+    {
+      "objection_id": "COS-002",
+      "disposition": "mitigated",
+      "resolution": "Updated ADR-0001 to specify request-scoped CPU allocation with auto-scaling to match real-time demand.",
+      "adr_updated": "0001"
+    },
+    {
+      "objection_id": "SIM-001",
+      "disposition": "mitigated",
+      "resolution": "Updated ADR-0003 to confine Pub/Sub to asynchronous background notification events and audit ingestion, keeping core CRUD strictly transactional.",
+      "adr_updated": "0003"
+    },
+    {
+      "objection_id": "SIM-002",
+      "disposition": "mitigated",
+      "resolution": "Updated ADR-0001 to structure the system as cohesive subsystems (task_service and audit_service) sharing clean modular boundaries.",
+      "adr_updated": "0001"
+    }
+  ]
+}
